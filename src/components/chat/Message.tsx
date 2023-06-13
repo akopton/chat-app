@@ -1,9 +1,9 @@
 "use client"
 
-export const Message = () => {
+export const Message = ({ text }: { text: string }) => {
   return (
     <div className="bg-slate-600 text-white  p-2">
-      <p>to jest wiadomość</p>
+      <p>{text}</p>
     </div>
   )
 }
