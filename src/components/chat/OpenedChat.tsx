@@ -1,13 +1,15 @@
 "use client"
 
+import { useRef } from "react"
 import { MessageInput } from "./MessageInput"
 import { MessagesWindow } from "./MessagesWindow"
 
 export const OpenedChat = () => {
+  const messagesWindowRef = useRef(null)
   return (
     <div className="w-full border-l-2 border-black border-solid px-5 py-2 bg-slate-400 flex flex-col justify-between gap-4">
-      <MessagesWindow />
-      <MessageInput />
+      <MessagesWindow messagesWindowRef={messagesWindowRef} />
+      <MessageInput messagesWindowRef={messagesWindowRef} />
     </div>
   )
 }
