@@ -3,10 +3,10 @@ import Link from "next/link"
 
 export default function LoginPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex flex-col items-center gap-10 border-2 border-solid border-black px-10 py-10 rounded-xl bg-slate-300">
       <p>Login page</p>
       <LoginForm />
       <Link href="/">go back</Link>
-    </main>
+    </div>
   )
 }

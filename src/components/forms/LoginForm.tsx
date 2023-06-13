@@ -22,9 +22,10 @@ export const LoginForm = () => {
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
       <CustomInput
-        id="login"
-        name="login"
-        type="text"
+        id="email"
+        name="email"
+        type="email"
+        placeholder="Email"
         value={email}
         onChange={handleEmail}
       />
@@ -32,6 +33,7 @@ export const LoginForm = () => {
         id="password"
         name="password"
         type="password"
+        placeholder="Password"
         value={password}
         onChange={handlePassword}
       />

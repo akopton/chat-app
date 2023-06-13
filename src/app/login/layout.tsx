@@ -3,5 +3,9 @@ export default function LoginLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <main className="p-24 min-h-screen max-h-screen flex items-center justify-center">
+      {children}
+    </main>
+  )
 }

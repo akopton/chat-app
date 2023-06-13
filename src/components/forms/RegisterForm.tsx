@@ -23,11 +23,12 @@ export const RegisterForm = () => {
   }
 
   return (
-    <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-5 " onSubmit={handleSubmit}>
       <CustomInput
         id="name"
         name="name"
         type="text"
+        placeholder="Display name"
         value={displayName}
         onChange={handleName}
       />
@@ -35,6 +36,7 @@ export const RegisterForm = () => {
         id="email"
         name="email"
         type="email"
+        placeholder="Email"
         value={email}
         onChange={handleEmail}
       />
@@ -42,6 +44,7 @@ export const RegisterForm = () => {
         id="password"
         name="password"
         type="password"
+        placeholder="Password"
         value={password}
         onChange={handlePassword}
       />

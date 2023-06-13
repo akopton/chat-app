@@ -22,6 +22,7 @@ export const MessageInput = ({ messagesWindowRef, setMessages }: any) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (!newMessage) return
     setMessages((prevState: any) => [...prevState, newMessage])
     setTimeout(() => {
       messagesWindowRef.current.scrollTop =
