@@ -41,3 +41,17 @@ body {
       }
     }
   }
+
+  input {
+    outline: none;
+  }
+
+  input:-webkit-autofill {
+    /* Prevent background color change */
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+  }
+  
+  input:-webkit-autofill::first-line {
+    /* Prevent text color change */
+    -webkit-text-fill-color: inherit !important;
+  }
