@@ -1,6 +1,6 @@
 import Link from "next/link"
 import LoginPage from "./login/page"
-import { ChatWindow } from "@/components/ChatWindow"
+import { ChatWindow } from "@/components/chat/ChatWindow"
 
 export default function Home() {
   return (
