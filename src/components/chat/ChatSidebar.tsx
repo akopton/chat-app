@@ -1,7 +1,7 @@
 "use client"
 
 import { Settings } from "./Settings"
-import { Users } from "./Users"
+import { Users } from "./UsersList"
 
 export const ChatSidebar = () => {
   return (

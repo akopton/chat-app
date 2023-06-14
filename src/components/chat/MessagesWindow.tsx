@@ -10,7 +10,7 @@ export const MessagesWindow = ({ messagesWindowRef, messages }: any) => {
       ref={messagesWindowRef}
     >
       {messages.map((m: string, id: number) => {
-        return <Message text={m} key={id} />
+        return <Message text={m} id={id} key={id} />
       })}
     </div>
   )

@@ -1,4 +1,4 @@
 "use client"
-export const SingleUser = () => {
+export const User = () => {
   return <li>user</li>
 }

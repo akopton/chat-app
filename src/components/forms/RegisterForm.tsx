@@ -1,12 +1,23 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { ChangeEvent, FormEventHandler, useState } from "react"
 import { CustomInput } from "./CustomInput"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
+import { setDoc, doc } from "firebase/firestore"
+import { auth, db, storage } from "../../firebase/firebase"
 
 export const RegisterForm = () => {
   const [displayName, setDisplayName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const [photo, setPhoto] = useState<File>()
+  const [dbConnectionError, setDbConnectionError] = useState<boolean>(false)
+  const [errors, setErrors] = useState<{
+    name: boolean
+    email: boolean
+    password: boolean
+  }>({ name: false, email: false, password: false })
 
   const handleName = (e: React.FormEvent<HTMLInputElement>) => {
     setDisplayName(e.currentTarget.value)
@@ -18,8 +29,88 @@ export const RegisterForm = () => {
     setPassword(e.currentTarget.value)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handlePhoto = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    setPhoto(file)
+  }
+
+  const dataValidation = (): boolean => {
+    console.log("elo")
+
+    if (!displayName) {
+      setErrors((prevState) => ({ ...prevState, name: true }))
+      return false
+    } else setErrors((prevState) => ({ ...prevState, name: false }))
+    if (!email) {
+      setErrors((prevState) => ({ ...prevState, email: true }))
+      return false
+    } else setErrors((prevState) => ({ ...prevState, email: false }))
+    if (!password) {
+      setErrors((prevState) => ({ ...prevState, password: true }))
+      return false
+    } else setErrors((prevState) => ({ ...prevState, password: false }))
+
+    return true
+  }
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault()
+
+    if (!dataValidation()) return
+
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password)
+
+      const storageRef = ref(storage, displayName)
+
+      if (photo) {
+        const uploadTask = uploadBytesResumable(storageRef, photo)
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            console.log("Upload is " + progress + "% done")
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused")
+                break
+              case "running":
+                console.log("Upload is running")
+                break
+            }
+          },
+          (err) => {
+            console.log(err)
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL: string) => {
+                await updateProfile(res.user, {
+                  displayName,
+                  photoURL: downloadURL,
+                })
+                await setDoc(doc(db, "users", res.user.uid), {
+                  uid: res.user.uid,
+                  displayName,
+                  email,
+                  photoURL: downloadURL,
+                })
+              }
+            )
+          }
+        )
+      }
+    } catch (err) {
+      console.error(err)
+      setDbConnectionError(true)
+    } finally {
+      setDbConnectionError(false)
+    }
   }
 
   return (
@@ -48,7 +139,8 @@ export const RegisterForm = () => {
         value={password}
         onChange={handlePassword}
       />
-      <input type="submit" value="Send" />
+      <input type="file" name="photo" id="photo" onChange={handlePhoto} />
+      <input type="submit" value="Send" className="cursor-pointer" />
     </form>
   )
 }
