@@ -1,6 +1,6 @@
 "use client"
 
-import React, { ChangeEvent, FormEventHandler, useState } from "react"
+import React, { ChangeEvent, useState } from "react"
 import { CustomInput } from "./CustomInput"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
