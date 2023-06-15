@@ -12,11 +12,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<FirebaseUser | undefined>()
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user)
+        console.log(user)
       }
     })
+
+    return () => unsub()
   }, [])
 
   return (

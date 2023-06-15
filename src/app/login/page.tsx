@@ -1,5 +1,5 @@
 import { LoginForm } from "@/components/forms/LoginForm"
-import { AuthContextProvider } from "@/context/AuthContext"
+import { AuthContextProvider } from "../../context/AuthContext"
 import Link from "next/link"
 
 export default function LoginPage() {
@@ -9,7 +9,7 @@ export default function LoginPage() {
       <AuthContextProvider>
         <LoginForm />
       </AuthContextProvider>
-      <Link href="/">go back</Link>
+      <Link href="/register">Register</Link>
     </div>
   )
 }

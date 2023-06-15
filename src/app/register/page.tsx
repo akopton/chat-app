@@ -1,5 +1,5 @@
 import { RegisterForm } from "@/components/forms/RegisterForm"
-import { AuthContextProvider } from "@/context/AuthContext"
+import { AuthContextProvider } from "../../context/AuthContext"
 import Link from "next/link"
 
 export default function RegisterPage() {
