@@ -7,21 +7,27 @@ import { auth } from "../../firebase/firebase"
 import { useRouter } from "next/navigation"
 
 export const Settings = () => {
+  const currentUser: FirebaseUser = useContext(AuthContext)
   const router = useRouter()
-  const handleLogout = () => {
-    signOut(auth)
+
+  const handleLogout = async () => {
+    await signOut(auth)
     router.push("/login")
   }
 
-  const currentUser: FirebaseUser = useContext(AuthContext)
-
   return (
-    <div className="flex items-center justify-between border-b-2 border-solid border-white py-2 px-1">
-      <div className="flex items-center gap-4">
-        <div className="w-12 h-12 border border-solid border-black bg-red-500 rounded-full"></div>
+    <div className="flex items-center gap-5 border-b-2 border-solid border-white py-2 px-1">
+      <div className="flex items-center gap-1">
+        <div className="w-12 h-12 border border-solid border-black bg-red-500 rounded-full overflow-hidden">
+          <img
+            src={currentUser && `${currentUser.photoURL}`}
+            alt=""
+            className="object-fill scale-125"
+          />
+        </div>
         <p>{currentUser.displayName}</p>
       </div>
-      <button onClick={() => handleLogout()}>wyloguj</button>
+      <button onClick={handleLogout}>wyloguj</button>
     </div>
   )
 }
