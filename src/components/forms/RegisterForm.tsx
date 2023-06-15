@@ -6,8 +6,9 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { setDoc, doc } from "firebase/firestore"
 import { auth, db, storage } from "../../firebase/firebase"
+import { useRouter } from "next/navigation"
 
-export const RegisterForm = () => {
+export const RegisterForm = ({}) => {
   const [displayName, setDisplayName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
@@ -18,7 +19,11 @@ export const RegisterForm = () => {
     email: boolean
     password: boolean
   }>({ name: false, email: false, password: false })
+  const router = useRouter()
 
+  const handleNavigation = (url: string) => {
+    router.push(url)
+  }
   const handleName = (e: React.FormEvent<HTMLInputElement>) => {
     setDisplayName(e.currentTarget.value)
   }
@@ -70,8 +75,6 @@ export const RegisterForm = () => {
         uploadTask.on(
           "state_changed",
           (snapshot) => {
-            // Observe state change events such as progress, pause, and resume
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             console.log("Upload is " + progress + "% done")
@@ -100,6 +103,7 @@ export const RegisterForm = () => {
                   email,
                   photoURL: downloadURL,
                 })
+                router.push("/")
               }
             )
           }
