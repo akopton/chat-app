@@ -21,11 +21,8 @@ export const RegisterForm = ({}) => {
   }>({ name: false, email: false, password: false })
   const router = useRouter()
 
-  const handleNavigation = (url: string) => {
-    router.push(url)
-  }
   const handleName = (e: React.FormEvent<HTMLInputElement>) => {
-    setDisplayName(e.currentTarget.value)
+    setDisplayName(e.currentTarget.value.toLowerCase())
   }
   const handleEmail = (e: React.FormEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value)
@@ -103,6 +100,7 @@ export const RegisterForm = ({}) => {
                   email,
                   photoURL: downloadURL,
                 })
+                await setDoc(doc(db, "userChats", res.user.uid), {})
                 router.push("/")
               }
             )
