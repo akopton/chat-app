@@ -6,10 +6,14 @@ import { db, storage } from "@/firebase/firebase"
 import { inputResize } from "@/utils/inputResize"
 import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
-import { useContext, useState } from "react"
+import { Ref, useContext, useState } from "react"
 import { v4 as uuid } from "uuid"
 
-export const MessageInput = () => {
+export const MessageInput = ({
+  messagesWindowRef,
+}: {
+  messagesWindowRef: any
+}) => {
   const currentUser = useContext(AuthContext)
   const { state } = useContext(ChatContext)
 
@@ -18,6 +22,7 @@ export const MessageInput = () => {
 
   const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
     inputResize(e)
+    messagesWindowRef.current.scrollTop = messagesWindowRef.current.scrollHeight
     setText(e.currentTarget.value)
   }
 
@@ -25,15 +30,15 @@ export const MessageInput = () => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       const formEvent = e as React.FormEvent
-      setText("")
-      setImg(undefined)
+
       handleSubmit(formEvent)
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
+    setText("")
+    setImg(undefined)
     if (!img) {
       await updateDoc(doc(db, "chats", state.chatId), {
         messages: arrayUnion({
@@ -85,7 +90,7 @@ export const MessageInput = () => {
 
   return (
     <form
-      className="text-white w-full sticky top-full flex"
+      className="text-white w-full sticky bottom-0 top-full flex"
       onSubmit={handleSubmit}
     >
       <textarea

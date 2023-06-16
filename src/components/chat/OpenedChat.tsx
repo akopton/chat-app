@@ -9,6 +9,9 @@ export const OpenedChat = () => {
   const {
     state: { user },
   } = useContext(ChatContext)
+
+  const messagesWindowRef = useRef(null)
+
   return (
     <div className="w-full h-full border-l-2 border-black border-solid px-5 py-2 bg-slate-400 flex flex-col gap-4 relative">
       <div className="justify-self-start flex items-center gap-2">
@@ -17,8 +20,8 @@ export const OpenedChat = () => {
         </div>
         <p className="text-white text-xl">{user?.displayName}</p>
       </div>
-      <MessagesWindow />
-      <MessageInput />
+      <MessagesWindow messagesWindowRef={messagesWindowRef} />
+      <MessageInput messagesWindowRef={messagesWindowRef} />
     </div>
   )
 }

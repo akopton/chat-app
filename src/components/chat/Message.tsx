@@ -4,7 +4,7 @@ import { AuthContext } from "@/context/AuthContext"
 import { ChatContext } from "@/context/ChatContext"
 import { useContext, useEffect } from "react"
 
-export const Message = ({ m, id, messagesWindowRef }: any) => {
+export const Message = ({ m, messagesWindowRef }: any) => {
   const currentUser = useContext(AuthContext)
   const { state } = useContext(ChatContext)
 
@@ -19,7 +19,7 @@ export const Message = ({ m, id, messagesWindowRef }: any) => {
       }`}
     >
       <div
-        className={`w-10 h-10 rounded-full overflow-hidden ${
+        className={` h-10 w-10 border-black  rounded-full overflow-hidden ${
           currentUser.uid === m.senderId ? "order-2" : ""
         }`}
       >
@@ -30,9 +30,10 @@ export const Message = ({ m, id, messagesWindowRef }: any) => {
               : state.user.photoURL
           }
           alt=""
+          className="min-w-full min-h-full"
         />
       </div>
-      <div className="bg-slate-600 px-4 py-2 rounded-3xl flex flex-col items-center gap-2 text-white">
+      <div className="bg-slate-600 max-w-md px-4 py-2 rounded-3xl flex flex-col items-center gap-2 text-white">
         <p>{m.text}</p>
         {m.img && <img src={m.img} alt="" className="h-24 w-24 rounded-3xl" />}
       </div>

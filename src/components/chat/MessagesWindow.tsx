@@ -1,17 +1,27 @@
 "use client"
 
-import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react"
+import {
+  Ref,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react"
 import { Message } from "./Message"
 import { ChatContext } from "@/context/ChatContext"
 import { doc, onSnapshot } from "firebase/firestore"
 import { db } from "@/firebase/firebase"
 
-export const MessagesWindow = () => {
+export const MessagesWindow = ({
+  messagesWindowRef,
+}: {
+  messagesWindowRef: any
+}) => {
   const [messages, setMessages] = useState<any>()
   const {
     state: { chatId },
   } = useContext(ChatContext)
-  const messagesWindowRef = useRef(null)
   useEffect(() => {
     if (chatId) {
       const unsub = onSnapshot(doc(db, "chats", chatId), (doc) => {

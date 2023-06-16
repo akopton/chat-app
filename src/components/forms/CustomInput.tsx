@@ -2,7 +2,7 @@
 
 import { ChangeEventHandler } from "react"
 
-interface InputProps {
+type InputProps = {
   id: string
   type: string
   name: string
