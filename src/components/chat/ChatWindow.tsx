@@ -5,12 +5,13 @@ import { ChatSidebar } from "./ChatSidebar"
 import { OpenedChat } from "./OpenedChat"
 import { AuthContext } from "../../context/AuthContext"
 import Link from "next/link"
+import { ChatContextProvider } from "@/context/ChatContext"
 
 export const ChatWindow = () => {
   const currentUser = useContext(AuthContext)
 
   return (
-    <>
+    <ChatContextProvider>
       {currentUser.uid ? (
         <>
           <div className="flex border-2 border-black border-solid rounded-xl h-5/6 w-3/5 overflow-hidden">
@@ -21,6 +22,6 @@ export const ChatWindow = () => {
       ) : (
         <Link href="/login">zaloguj się</Link>
       )}
-    </>
+    </ChatContextProvider>
   )
 }

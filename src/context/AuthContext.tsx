@@ -1,9 +1,8 @@
 "use client"
 import { auth } from "../firebase/firebase"
-import { Unsubscribe, onAuthStateChanged } from "firebase/auth"
+import { onAuthStateChanged } from "firebase/auth"
 import { ReactNode, createContext, useEffect, useState } from "react"
 import { User as FirebaseUser } from "firebase/auth"
-import { FirebaseError } from "firebase/app"
 
 const defaultUser = {} as FirebaseUser
 export const AuthContext = createContext(defaultUser)

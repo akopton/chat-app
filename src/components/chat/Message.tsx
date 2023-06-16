@@ -1,6 +1,12 @@
 "use client"
 
-export const Message = ({ text, id }: { text: string; id: number }) => {
+import { AuthContext } from "@/context/AuthContext"
+import { ChatContext } from "@/context/ChatContext"
+import { useContext } from "react"
+
+export const Message = ({ m, id }: any) => {
+  const currentUser = useContext(AuthContext)
+  const { state } = useContext(ChatContext)
   return (
     <div
       className={
@@ -8,7 +14,8 @@ export const Message = ({ text, id }: { text: string; id: number }) => {
         `${id % 2 === 0 ? "self-start" : "self-end"}`
       }
     >
-      <p>{text}</p>
+      <div className="w-10 h-10 rounded-full overflow-hidden"></div>
+      <p>{m.text}</p>
     </div>
   )
 }
