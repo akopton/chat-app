@@ -57,7 +57,10 @@ export const LoginForm = () => {
   }
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+    <form
+      className="flex flex-col items-center gap-5 text-white"
+      onSubmit={handleSubmit}
+    >
       <CustomInput
         id="email"
         name="email"
@@ -74,7 +77,11 @@ export const LoginForm = () => {
         value={password}
         onChange={handlePassword}
       />
-      <input type="submit" value="Send" className="cursor-pointer" />
+      <input
+        type="submit"
+        value="Log in"
+        className="cursor-pointer border-2 border-teal-500 rounded-xl px-8 py-1 text-2xl hover:rounded-3xl transition-all flex items-center justify-center"
+      />
     </form>
   )
 }

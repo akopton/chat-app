@@ -53,13 +53,14 @@ input, textarea {
     resize: none;
     appearance: none;
     background-color: transparent;
-    color: black;
+    color: white !important;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   /* Prevent autofill styles */
-  -webkit-box-shadow: 0 0 0 30px #cbd5e1 inset !important;
+  -webkit-box-shadow: 0 0 0 30px rgb(63, 63, 70) inset !important;
+  -webkit-text-fill-color: white;
   background: transparent;
 }

@@ -21,7 +21,7 @@ export const CustomInput = ({
 }: InputProps) => {
   return (
     <input
-      className="px-2 py-1 bg-transparent border-b-2 border-black text-xl"
+      className="px-2 py-1 bg-transparent border-b-2 border-teal-500 text-xl text-white"
       id={id}
       type={type}
       name={name}
