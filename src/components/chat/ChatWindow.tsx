@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext } from "react"
+import React, { useContext, useRef } from "react"
 import { ChatSidebar } from "./ChatSidebar"
 import { OpenedChat } from "./OpenedChat"
 import { AuthContext } from "../../context/AuthContext"
@@ -14,7 +14,7 @@ export const ChatWindow = () => {
     <ChatContextProvider>
       {currentUser.uid ? (
         <>
-          <div className="flex border-2 border-black border-solid rounded-xl h-5/6 w-3/5 overflow-hidden">
+          <div className="flex border-2 border-black border-solid rounded-xl sm:h-5/6 sm:w-3/5 overflow-hidden">
             <ChatSidebar />
             <OpenedChat />
           </div>

@@ -17,7 +17,6 @@ export const Users = () => {
     return () => unsub()
   }, [currentUser.uid])
 
-  chats && console.log(Object.entries(chats))
   return (
     <ul className="flex flex-col">
       {chats &&

@@ -2,11 +2,16 @@
 
 import { AuthContext } from "@/context/AuthContext"
 import { ChatContext } from "@/context/ChatContext"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
-export const Message = ({ m, id }: any) => {
+export const Message = ({ m, id, messagesWindowRef }: any) => {
   const currentUser = useContext(AuthContext)
   const { state } = useContext(ChatContext)
+
+  useEffect(() => {
+    messagesWindowRef.current.scrollTop = messagesWindowRef.current.scrollHeight
+  }, [])
+
   return (
     <div
       className={
@@ -14,7 +19,16 @@ export const Message = ({ m, id }: any) => {
         `${id % 2 === 0 ? "self-start" : "self-end"}`
       }
     >
-      <div className="w-10 h-10 rounded-full overflow-hidden"></div>
+      <div className="w-10 h-10 rounded-full overflow-hidden">
+        <img
+          src={
+            currentUser.photoURL && m.senderId === currentUser.uid
+              ? currentUser.photoURL
+              : state.user.photoURL
+          }
+          alt=""
+        />
+      </div>
       <p>{m.text}</p>
     </div>
   )

@@ -6,7 +6,8 @@ import { useContext } from "react"
 
 export const User = ({ data }: any) => {
   const { dispatch } = useContext(ChatContext)
-  const handleSelect = (user: TUserInfo) => {
+
+  const handleSelect = async (user: TUserInfo) => {
     dispatch({ type: "CHANGE_USER", payload: user })
   }
 

@@ -9,7 +9,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { useContext, useState } from "react"
 import { v4 as uuid } from "uuid"
 
-export const MessageInput = ({ messagesWindowRef }: any) => {
+export const MessageInput = () => {
   const currentUser = useContext(AuthContext)
   const { state } = useContext(ChatContext)
 
@@ -18,7 +18,6 @@ export const MessageInput = ({ messagesWindowRef }: any) => {
 
   const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
     inputResize(e)
-    messagesWindowRef.current.scrollTop = messagesWindowRef.current.scrollHeight
     setText(e.currentTarget.value)
   }
 
@@ -82,11 +81,6 @@ export const MessageInput = ({ messagesWindowRef }: any) => {
         }
       )
     }
-
-    setTimeout(() => {
-      messagesWindowRef.current.scrollTop =
-        messagesWindowRef.current.scrollHeight
-    }, 100)
   }
 
   return (
