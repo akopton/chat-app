@@ -14,12 +14,15 @@ export const Message = ({ m, id, messagesWindowRef }: any) => {
 
   return (
     <div
-      className={
-        "bg-slate-600 text-white p-2 " +
-        `${id % 2 === 0 ? "self-start" : "self-end"}`
-      }
+      className={`flex items-end gap-5 ${
+        currentUser.uid === m.senderId ? "self-end" : "self-start"
+      }`}
     >
-      <div className="w-10 h-10 rounded-full overflow-hidden">
+      <div
+        className={`w-10 h-10 rounded-full overflow-hidden ${
+          currentUser.uid === m.senderId ? "order-2" : ""
+        }`}
+      >
         <img
           src={
             currentUser.photoURL && m.senderId === currentUser.uid
@@ -29,7 +32,10 @@ export const Message = ({ m, id, messagesWindowRef }: any) => {
           alt=""
         />
       </div>
-      <p>{m.text}</p>
+      <div className="bg-slate-600 px-4 py-2 rounded-3xl flex flex-col items-center gap-2 text-white">
+        <p>{m.text}</p>
+        {m.img && <img src={m.img} alt="" className="h-24 w-24 rounded-3xl" />}
+      </div>
     </div>
   )
 }
