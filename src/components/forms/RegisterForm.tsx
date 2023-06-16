@@ -18,7 +18,8 @@ export const RegisterForm = ({}) => {
     name: boolean
     email: boolean
     password: boolean
-  }>({ name: false, email: false, password: false })
+    photo: boolean
+  }>({ name: false, email: false, password: false, photo: false })
   const router = useRouter()
 
   const handleName = (e: React.FormEvent<HTMLInputElement>) => {
@@ -37,20 +38,25 @@ export const RegisterForm = ({}) => {
   }
 
   const dataValidation = (): boolean => {
-    console.log("elo")
-
     if (!displayName) {
       setErrors((prevState) => ({ ...prevState, name: true }))
       return false
     } else setErrors((prevState) => ({ ...prevState, name: false }))
+
     if (!email) {
       setErrors((prevState) => ({ ...prevState, email: true }))
       return false
     } else setErrors((prevState) => ({ ...prevState, email: false }))
+
     if (!password) {
       setErrors((prevState) => ({ ...prevState, password: true }))
       return false
     } else setErrors((prevState) => ({ ...prevState, password: false }))
+
+    if (!photo) {
+      setErrors((prevState) => ({ ...prevState, photo: true }))
+      return false
+    } else setErrors((prevState) => ({ ...prevState, photo: false }))
 
     return true
   }
@@ -64,7 +70,6 @@ export const RegisterForm = ({}) => {
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password)
-
       const storageRef = ref(storage, displayName)
 
       if (photo) {

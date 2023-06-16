@@ -26,7 +26,11 @@ export const Search = () => {
     setUser(null)
     setUsername(e.currentTarget.value)
 
-    const q = query(usersRef, where("displayName", "==", username))
+    const q = query(
+      usersRef,
+      where("displayName", "==", username),
+      where("displayName", "!=", currentUser.displayName)
+    )
     const querySnapshot = await getDocs(q)
     if (!querySnapshot.docs.length && username != "") setUserNotFound(true)
     else setUserNotFound(false)
@@ -37,8 +41,8 @@ export const Search = () => {
 
   const selectUser = async () => {
     const chatId =
-      currentUser.uid > user.id
-        ? currentUser.uid + user.id
+      currentUser.uid > user.uid
+        ? currentUser.uid + user.uid
         : user.uid + currentUser.uid
     const docRef = doc(db, "chats", chatId)
 

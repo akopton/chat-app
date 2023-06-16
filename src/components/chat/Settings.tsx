@@ -18,7 +18,7 @@ export const Settings = () => {
   return (
     <div className="flex items-center gap-5 border-b-2 border-solid border-white py-2 px-1">
       <div className="flex items-center gap-1">
-        <div className="w-12 h-12 border border-solid border-black bg-red-500 rounded-full overflow-hidden">
+        <div className="w-12 h-12 rounded-full overflow-hidden">
           <img
             src={currentUser && `${currentUser.photoURL}`}
             alt=""

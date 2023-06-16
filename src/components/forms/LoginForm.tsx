@@ -26,8 +26,6 @@ export const LoginForm = () => {
   }
 
   const dataValidation = (): boolean => {
-    console.log("elo")
-
     if (!email) {
       setErrors((prevState) => ({ ...prevState, email: true }))
       return false
