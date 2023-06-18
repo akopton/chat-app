@@ -18,11 +18,13 @@ export const Users = () => {
   }, [currentUser.uid])
 
   return (
-    <ul className="flex flex-col w-60">
+    <ul className="flex flex-col w-72">
       {chats &&
-        Object.entries(chats).map((chat: any) => {
-          return <User key={chat[0]} data={chat[1]} />
-        })}
+        Object.entries(chats)
+          .sort((a: any, b: any) => b[1].date - a[1].date)
+          .map((chat: any) => {
+            return <User key={chat[0]} data={chat[1]} />
+          })}
     </ul>
   )
 }

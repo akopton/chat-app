@@ -1,11 +1,11 @@
 "use client"
 
-import React, { useContext, useRef } from "react"
+import React, { useContext, useEffect, useRef } from "react"
 import { ChatSidebar } from "./ChatSidebar"
 import { OpenedChat } from "./OpenedChat"
 import { AuthContext } from "../../context/AuthContext"
 import Link from "next/link"
-import { ChatContextProvider } from "@/context/ChatContext"
+import { ChatContext, ChatContextProvider } from "@/context/ChatContext"
 
 export const ChatWindow = () => {
   const currentUser = useContext(AuthContext)

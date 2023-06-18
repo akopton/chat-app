@@ -119,7 +119,7 @@ export const MessageInput = ({
         placeholder="Type your message here..."
         onChange={handleInput}
         onKeyDown={handleKeyDown}
-        style={{ height: "auto", minHeight: "10px" }}
+        style={{ height: "40px", minHeight: "10px" }}
         value={text}
       />
       <div className="absolute right-2 bottom-0 w-1/6 flex items-center">

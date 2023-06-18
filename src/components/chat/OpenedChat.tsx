@@ -7,6 +7,7 @@ import { ChatContext } from "@/context/ChatContext"
 
 export const OpenedChat = () => {
   const {
+    state,
     state: { user },
   } = useContext(ChatContext)
 
@@ -21,7 +22,7 @@ export const OpenedChat = () => {
         <p className="text-white text-xl">{user?.displayName}</p>
       </div>
       <MessagesWindow messagesWindowRef={messagesWindowRef} />
-      <MessageInput messagesWindowRef={messagesWindowRef} />
+      {state.chatId && <MessageInput messagesWindowRef={messagesWindowRef} />}
     </div>
   )
 }

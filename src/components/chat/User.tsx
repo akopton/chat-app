@@ -1,5 +1,6 @@
 "use client"
 
+import { useDate } from "@/app/hooks/useDate"
 import { ChatContext } from "@/context/ChatContext"
 import { TUserInfo } from "@/types/TUserInfo"
 import { useContext } from "react"
@@ -10,6 +11,8 @@ export const User = ({ data }: any) => {
   const handleSelect = async (user: TUserInfo) => {
     dispatch({ type: "CHANGE_USER", payload: user })
   }
+
+  const messageDate = useDate(data.date)
 
   return (
     <li
@@ -33,6 +36,7 @@ export const User = ({ data }: any) => {
           </p>
         )}
       </div>
+      <span>{messageDate}</span>
     </li>
   )
 }
