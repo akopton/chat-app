@@ -21,7 +21,6 @@ export const Settings = () => {
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <img
             src={currentUser && `${currentUser.photoURL}`}
-            alt=""
             className="object-fill scale-125"
           />
         </div>

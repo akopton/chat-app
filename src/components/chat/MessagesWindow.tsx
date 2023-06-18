@@ -10,8 +10,9 @@ import {
 } from "react"
 import { Message } from "./Message"
 import { ChatContext } from "@/context/ChatContext"
-import { doc, onSnapshot } from "firebase/firestore"
+import { doc, onSnapshot, updateDoc } from "firebase/firestore"
 import { db } from "@/firebase/firebase"
+import { AuthContext } from "@/context/AuthContext"
 
 export const MessagesWindow = ({
   messagesWindowRef,

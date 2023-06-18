@@ -11,7 +11,7 @@ export const ChatWindow = () => {
   const currentUser = useContext(AuthContext)
 
   return (
-    <ChatContextProvider>
+    <>
       {currentUser.uid ? (
         <>
           <div className="flex border-2 border-black border-solid rounded-xl sm:h-5/6 sm:w-3/5 overflow-hidden">
@@ -22,6 +22,6 @@ export const ChatWindow = () => {
       ) : (
         <Link href="/login">zaloguj się</Link>
       )}
-    </ChatContextProvider>
+    </>
   )
 }

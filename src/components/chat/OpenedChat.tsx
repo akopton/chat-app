@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useRef } from "react"
 import { MessageInput } from "./MessageInput"
 import { MessagesWindow } from "./MessagesWindow"
 import { ChatContext } from "@/context/ChatContext"
@@ -10,7 +10,6 @@ export const OpenedChat = () => {
     state,
     state: { user },
   } = useContext(ChatContext)
-
   const messagesWindowRef = useRef(null)
 
   return (

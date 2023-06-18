@@ -12,7 +12,7 @@ import {
   updateDoc,
 } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
-import { Ref, useContext, useState } from "react"
+import { Ref, useContext, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 
 export const MessageInput = ({
@@ -97,6 +97,7 @@ export const MessageInput = ({
       [state.chatId + ".lastMessage"]: {
         text,
         senderId: currentUser.uid,
+        isOpened: true,
       },
       [state.chatId + ".date"]: serverTimestamp(),
     })
@@ -104,10 +105,15 @@ export const MessageInput = ({
       [state.chatId + ".lastMessage"]: {
         text,
         senderId: currentUser.uid,
+        isOpened: false,
       },
       [state.chatId + ".date"]: serverTimestamp(),
     })
   }
+
+  useEffect(() => {
+    console.log(state)
+  }, [state])
 
   return (
     <form
