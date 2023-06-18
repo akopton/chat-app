@@ -39,7 +39,7 @@ export const MessagesWindow = ({
 
   return (
     <div
-      className="flex flex-col gap-3 py-2 overflow-y-scroll no-scrollbar"
+      className="flex flex-col gap-4 p-4 overflow-y-scroll no-scrollbar"
       ref={messagesWindowRef}
     >
       {messages?.map((m: any) => {

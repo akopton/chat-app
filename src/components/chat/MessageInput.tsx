@@ -117,7 +117,7 @@ export const MessageInput = ({
 
   return (
     <form
-      className="text-white w-full sticky bottom-0 top-full flex"
+      className="text-white w-full sticky bottom-0 top-full flex p-4"
       onSubmit={handleSubmit}
     >
       <textarea
@@ -128,7 +128,7 @@ export const MessageInput = ({
         style={{ height: "40px", minHeight: "10px" }}
         value={text}
       />
-      <div className="absolute right-2 bottom-0 w-1/6 flex items-center">
+      <div className="right-2 bottom-0 w-1/6 flex items-center justify-center">
         <input
           type="file"
           id="file"

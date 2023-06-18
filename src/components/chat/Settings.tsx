@@ -16,7 +16,7 @@ export const Settings = () => {
   }
 
   return (
-    <div className="flex items-center justify-between gap-5 border-b-2 border-solid border-neutral-500 p-4 relative">
+    <div className="flex items-center justify-between gap-5 border-b border-solid border-neutral-500 p-4 relative">
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <img
