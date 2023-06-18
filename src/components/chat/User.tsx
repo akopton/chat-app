@@ -20,12 +20,16 @@ export const User = ({ data }: any) => {
         <img
           alt=""
           className="object-fill scale-125"
-          src={data.userInfo.photoURL}
+          src={data?.userInfo?.photoURL}
         />
       </div>
       <div>
-        <p>{data.userInfo.displayName}</p>
-        <p>{data.lastMessage?.text}</p>
+        <p>{data?.userInfo?.displayName}</p>
+        <p>
+          {data.userInfo.uid === data.lastMessage.senderId
+            ? data?.lastMessage?.text
+            : `Ty: ${data?.lastMessage?.text}`}
+        </p>
       </div>
     </li>
   )

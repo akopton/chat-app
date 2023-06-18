@@ -4,7 +4,13 @@ import { AuthContext } from "@/context/AuthContext"
 import { ChatContext } from "@/context/ChatContext"
 import { db, storage } from "@/firebase/firebase"
 import { inputResize } from "@/utils/inputResize"
-import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore"
+import {
+  Timestamp,
+  arrayUnion,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { Ref, useContext, useState } from "react"
 import { v4 as uuid } from "uuid"
@@ -86,6 +92,21 @@ export const MessageInput = ({
         }
       )
     }
+
+    await updateDoc(doc(db, "userChats", currentUser.uid), {
+      [state.chatId + ".lastMessage"]: {
+        text,
+        senderId: currentUser.uid,
+      },
+      [state.chatId + ".date"]: serverTimestamp(),
+    })
+    await updateDoc(doc(db, "userChats", state.user.uid), {
+      [state.chatId + ".lastMessage"]: {
+        text,
+        senderId: currentUser.uid,
+      },
+      [state.chatId + ".date"]: serverTimestamp(),
+    })
   }
 
   return (
