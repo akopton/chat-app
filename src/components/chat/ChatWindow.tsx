@@ -14,7 +14,7 @@ export const ChatWindow = () => {
     <>
       {currentUser.uid ? (
         <>
-          <div className="flex border-2 border-black border-solid rounded-xl sm:h-5/6 sm:w-3/5 overflow-hidden">
+          <div className="flex border-2 border-teal-500 border-solid rounded-xl sm:h-5/6 sm:w-3/5 overflow-hidden">
             <ChatSidebar />
             <OpenedChat />
           </div>

@@ -16,17 +16,21 @@ export const Settings = () => {
   }
 
   return (
-    <div className="flex items-center gap-5 border-b-2 border-solid border-white py-2 px-1">
-      <div className="flex items-center gap-1">
+    <div className="flex items-center justify-between gap-5 border-b-2 border-solid border-neutral-500 p-4 relative">
+      <div className="flex items-center gap-4">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <img
             src={currentUser && `${currentUser.photoURL}`}
             className="object-fill scale-125"
           />
         </div>
-        <p>{currentUser.displayName}</p>
+        <p>
+          {currentUser.displayName &&
+            currentUser.displayName?.charAt(0).toUpperCase() +
+              currentUser.displayName?.slice(1)}
+        </p>
       </div>
-      <button onClick={handleLogout}>wyloguj</button>
+      <button onClick={handleLogout}>Log out</button>
     </div>
   )
 }

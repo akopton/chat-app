@@ -8,7 +8,7 @@ import { TUserInfo } from "@/types/TUserInfo"
 import { doc, updateDoc } from "firebase/firestore"
 import { useContext } from "react"
 
-export const User = ({ chatId, data }: any) => {
+export const Chat = ({ chatId, data }: any) => {
   const { dispatch } = useContext(ChatContext)
   const currentUser = useContext(AuthContext)
   const handleSelect = async (user: TUserInfo) => {
@@ -22,7 +22,7 @@ export const User = ({ chatId, data }: any) => {
 
   return (
     <li
-      className="flex items-center gap-4 hover:bg-red-100 cursor-pointer p-2"
+      className="flex items-center gap-4 hover:bg-neutral-700 cursor-pointer px-4 py-2"
       onClick={() => handleSelect(data.userInfo)}
     >
       <div className="w-12 h-12 rounded-full overflow-hidden">
@@ -33,7 +33,10 @@ export const User = ({ chatId, data }: any) => {
         />
       </div>
       <div className="w-3/6">
-        <p>{data?.userInfo?.displayName}</p>
+        <p>
+          {data?.userInfo?.displayName.charAt(0).toUpperCase() +
+            data?.userInfo?.displayName.slice(1)}
+        </p>
         {data.lastMessage && (
           <div
             className={`flex items-center gap-5  ${

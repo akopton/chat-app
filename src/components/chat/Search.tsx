@@ -76,7 +76,7 @@ export const Search = () => {
   }
 
   return (
-    <div className="flex flex-col gap-2 p-2">
+    <div className="flex flex-col gap-2 px-6 py-2">
       <input
         type="text"
         className="border border-solid border-white rounded-md px-2 py-2 text-white"
@@ -87,14 +87,17 @@ export const Search = () => {
       {userNotFound && <span>User not found</span>}
       {user && (
         <div
-          className="flex items-center gap-4 cursor-pointer"
+          className="flex items-center gap-4 cursor-pointer p-2 border-2 border-transparent rounded-md hover:border-white"
           onClick={() => selectUser()}
         >
           <div className="w-12 h-12 rounded-full overflow-hidden">
             <img src={user.photoURL} alt="" className="object-fill scale-125" />
           </div>
           <div>
-            <p>{user.displayName}</p>
+            <p>
+              {user.displayName.charAt(0).toUpperCase() +
+                user.displayName.slice(1)}
+            </p>
           </div>
         </div>
       )}

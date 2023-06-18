@@ -23,6 +23,8 @@ export const MessagesWindow = ({
   const {
     state: { chatId },
   } = useContext(ChatContext)
+  const currentUser = useContext(AuthContext)
+
   useEffect(() => {
     if (chatId) {
       const unsub = onSnapshot(doc(db, "chats", chatId), (doc) => {
@@ -37,7 +39,7 @@ export const MessagesWindow = ({
 
   return (
     <div
-      className="flex flex-col gap-5 overflow-y-scroll no-scrollbar"
+      className="flex flex-col gap-3 py-2 overflow-y-scroll no-scrollbar"
       ref={messagesWindowRef}
     >
       {messages?.map((m: any) => {

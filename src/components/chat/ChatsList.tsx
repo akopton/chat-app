@@ -1,11 +1,11 @@
 "use client"
 import { useContext, useEffect, useState } from "react"
-import { User } from "./User"
+import { Chat } from "./Chat"
 import { AuthContext } from "@/context/AuthContext"
 import { doc, onSnapshot } from "firebase/firestore"
 import { db } from "@/firebase/firebase"
 
-export const Users = () => {
+export const ChatsList = () => {
   const [chats, setChats] = useState<any>()
   const currentUser = useContext(AuthContext)
 
@@ -23,7 +23,7 @@ export const Users = () => {
         Object.entries(chats)
           .sort((a: [string, any], b: [string, any]) => b[1].date - a[1].date)
           .map((chat: any) => {
-            return <User key={chat[0]} chatId={chat[0]} data={chat[1]} />
+            return <Chat key={chat[0]} chatId={chat[0]} data={chat[1]} />
           })}
     </ul>
   )

@@ -13,7 +13,7 @@ export const OpenedChat = () => {
   const messagesWindowRef = useRef(null)
 
   return (
-    <div className="w-full h-full border-l-2 border-black border-solid px-5 py-2 bg-slate-400 flex flex-col gap-4 relative">
+    <div className="w-full h-full border-l-2 border-neutral-500 border-solid bg-neutral-900 flex flex-col gap-4 relative p-4">
       <div className="justify-self-start flex items-center gap-2">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <img alt="" className="object-fill scale-125" src={user?.photoURL} />

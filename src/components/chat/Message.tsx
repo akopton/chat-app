@@ -33,7 +33,11 @@ export const Message = ({ m, messagesWindowRef }: any) => {
           className="min-w-full min-h-full"
         />
       </div>
-      <div className="bg-slate-600 max-w-md px-4 py-2 rounded-3xl flex flex-col items-center gap-2 text-white">
+      <div
+        className={`max-w-md px-4 py-2 rounded-3xl flex flex-col items-center gap-2 text-white ${
+          currentUser.uid === m.senderId ? "bg-teal-700" : "bg-neutral-800"
+        }`}
+      >
         <p>{m.text}</p>
         {m.img && <img src={m.img} alt="" className="h-24 w-24 rounded-3xl" />}
       </div>

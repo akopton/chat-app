@@ -121,7 +121,7 @@ export const MessageInput = ({
       onSubmit={handleSubmit}
     >
       <textarea
-        className="text-white resize-none outline-none  placeholder:text-gray-400 px-2 py-2 bg-slate-500 rounded-md w-9/12 no-scrollbar"
+        className="text-white resize-none outline-none  placeholder:text-gray-400 px-2 py-2 bg-neutral-800 rounded-md w-9/12 no-scrollbar"
         placeholder="Type your message here..."
         onChange={handleInput}
         onKeyDown={handleKeyDown}
