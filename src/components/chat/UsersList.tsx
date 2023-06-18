@@ -18,7 +18,7 @@ export const Users = () => {
   }, [currentUser.uid])
 
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-col w-60">
       {chats &&
         Object.entries(chats).map((chat: any) => {
           return <User key={chat[0]} data={chat[1]} />

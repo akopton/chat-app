@@ -23,13 +23,15 @@ export const User = ({ data }: any) => {
           src={data?.userInfo?.photoURL}
         />
       </div>
-      <div>
+      <div className="w-3/5">
         <p>{data?.userInfo?.displayName}</p>
-        <p>
-          {data.userInfo.uid === data.lastMessage.senderId
-            ? data?.lastMessage?.text
-            : `Ty: ${data?.lastMessage?.text}`}
-        </p>
+        {data.lastMessage && (
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+            {data?.userInfo?.uid === data?.lastMessage?.senderId
+              ? data?.lastMessage?.text
+              : `Ty: ${data?.lastMessage?.text}`}
+          </p>
+        )}
       </div>
     </li>
   )
