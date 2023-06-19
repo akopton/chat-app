@@ -29,7 +29,7 @@ export const MessageInput = ({
   const currentUser = useContext(AuthContext)
   const { state } = useContext(ChatContext)
 
-  const [text, setText] = useState<string>()
+  const [text, setText] = useState<string>("")
   const [img, setImg] = useState<File | undefined>()
 
   const handleFile = (e: React.FormEvent<HTMLInputElement>) => {
@@ -90,6 +90,7 @@ export const MessageInput = ({
         text,
         senderId: currentUser.uid,
         isOpened: true,
+        img: img === undefined ? false : true,
       },
       [state.chatId + ".date"]: serverTimestamp(),
     })
@@ -98,6 +99,7 @@ export const MessageInput = ({
         text,
         senderId: currentUser.uid,
         isOpened: false,
+        img: img ? true : false,
       },
       [state.chatId + ".date"]: serverTimestamp(),
     })

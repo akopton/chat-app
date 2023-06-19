@@ -47,6 +47,13 @@ export const Chat = ({ chatId, data }: any) => {
                   : `Ty: ${data.lastMessage.text}`}
               </p>
             )}
+            {data.lastMessage.text === "" && data.lastMessage.img && (
+              <p className={`overflow-hidden whitespace-nowrap text-ellipsis`}>
+                {data.userInfo.uid === data.lastMessage.senderId
+                  ? "Sent a photo."
+                  : `Ty: Photo sent.`}
+              </p>
+            )}
             <span className="text-xs flex items-center">
               <BsDot className=" text-base" />
               {messageDate}
