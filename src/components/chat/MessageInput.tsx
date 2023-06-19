@@ -15,12 +15,11 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { Ref, useContext, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 import {
-  RiAttachment2,
-  RiCheckFill,
   RiCheckboxCircleFill,
   RiImageAddLine,
   RiSendPlane2Line,
 } from "react-icons/ri"
+import { addNewMessage } from "@/utils/addNewMessage"
 
 export const MessageInput = ({
   messagesWindowRef,
@@ -55,57 +54,37 @@ export const MessageInput = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!text) return
+    if (!text && !img) return
     setText("")
     setImg(undefined)
     if (!img) {
-      await updateDoc(doc(db, "chats", state.chatId), {
-        messages: arrayUnion({
-          id: uuid(),
-          text: text,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-        }),
-      })
+      const docRef = doc(db, "chats", state.chatId)
+      await addNewMessage(docRef, text, currentUser.uid, Timestamp.now())
     } else {
+      const docRef = doc(db, "chats", state.chatId)
       const storageRef = ref(storage, uuid())
       const uploadTask = uploadBytesResumable(storageRef, img)
       uploadTask.on(
         "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log("Upload is " + progress + "% done")
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused")
-              break
-            case "running":
-              console.log("Upload is running")
-              break
-          }
-        },
+        (snapshot) => {},
         (err) => {
           console.log(err)
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(
             async (downloadURL: string) => {
-              await updateDoc(doc(db, "chats", state.chatId), {
-                messages: arrayUnion({
-                  id: uuid(),
-                  text: text,
-                  senderId: currentUser.uid,
-                  date: Timestamp.now(),
-                  img: downloadURL,
-                }),
-              })
+              await addNewMessage(
+                docRef,
+                text,
+                currentUser.uid,
+                Timestamp.now(),
+                downloadURL
+              )
             }
           )
         }
       )
     }
-
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [state.chatId + ".lastMessage"]: {
         text,

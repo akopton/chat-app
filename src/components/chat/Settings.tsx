@@ -9,7 +9,7 @@ import { ChatContext } from "@/context/ChatContext"
 
 export const Settings = () => {
   const currentUser: FirebaseUser = useContext(AuthContext)
-  const { state, dispatch } = useContext(ChatContext)
+  const { dispatch } = useContext(ChatContext)
   const router = useRouter()
 
   const handleLogout = async () => {
