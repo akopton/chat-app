@@ -26,11 +26,7 @@ export const Chat = ({ chatId, data }: any) => {
       onClick={() => handleSelect(data.userInfo)}
     >
       <div className="w-12 h-12 rounded-full overflow-hidden">
-        <img
-          alt=""
-          className="object-fill scale-125"
-          src={data?.userInfo?.photoURL}
-        />
+        <img alt="" className=" scale-125" src={data?.userInfo?.photoURL} />
       </div>
       <div className="w-3/6">
         <p>
@@ -43,11 +39,13 @@ export const Chat = ({ chatId, data }: any) => {
               data.lastMessage.isOpened ? "font-normal" : "font-bold"
             }`}
           >
-            <p className={`overflow-hidden whitespace-nowrap text-ellipsis`}>
-              {data?.userInfo?.uid === data?.lastMessage?.senderId
-                ? data?.lastMessage?.text
-                : `Ty: ${data?.lastMessage?.text}`}
-            </p>
+            {data.lastMessage.text && (
+              <p className={`overflow-hidden whitespace-nowrap text-ellipsis`}>
+                {data?.userInfo?.uid === data?.lastMessage?.senderId
+                  ? data?.lastMessage?.text
+                  : `Ty: ${data?.lastMessage?.text}`}
+              </p>
+            )}
             <span className="text-xs">{messageDate}</span>
           </div>
         )}

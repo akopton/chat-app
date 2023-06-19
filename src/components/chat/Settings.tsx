@@ -5,14 +5,20 @@ import { useContext } from "react"
 import { User as FirebaseUser, signOut } from "firebase/auth"
 import { auth } from "../../firebase/firebase"
 import { useRouter } from "next/navigation"
+import { ChatContext } from "@/context/ChatContext"
 
 export const Settings = () => {
   const currentUser: FirebaseUser = useContext(AuthContext)
+  const { state, dispatch } = useContext(ChatContext)
   const router = useRouter()
 
   const handleLogout = async () => {
     await signOut(auth)
     router.push("/login")
+    dispatch({
+      type: "CHANGE_USER",
+      payload: { displayName: "", photoURL: "", uid: "" },
+    })
   }
 
   return (

@@ -14,6 +14,13 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { Ref, useContext, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
+import {
+  RiAttachment2,
+  RiCheckFill,
+  RiCheckboxCircleFill,
+  RiImageAddLine,
+  RiSendPlane2Line,
+} from "react-icons/ri"
 
 export const MessageInput = ({
   messagesWindowRef,
@@ -26,6 +33,11 @@ export const MessageInput = ({
   const [text, setText] = useState<string>()
   const [img, setImg] = useState<File | undefined>()
 
+  const handleFile = (e: React.FormEvent<HTMLInputElement>) => {
+    const file = e.currentTarget.files?.[0]
+    setImg(file)
+  }
+
   const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
     inputResize(e)
     messagesWindowRef.current.scrollTop = messagesWindowRef.current.scrollHeight
@@ -36,13 +48,14 @@ export const MessageInput = ({
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       const formEvent = e as React.FormEvent
-
+      e.currentTarget.style.height = "40px"
       handleSubmit(formEvent)
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!text) return
     setText("")
     setImg(undefined)
     if (!img) {
@@ -111,13 +124,9 @@ export const MessageInput = ({
     })
   }
 
-  useEffect(() => {
-    console.log(state)
-  }, [state])
-
   return (
     <form
-      className="text-white w-full sticky bottom-0 top-full flex p-4"
+      className="text-white w-full sticky bottom-0 top-full flex p-4 justify-around"
       onSubmit={handleSubmit}
     >
       <textarea
@@ -128,18 +137,18 @@ export const MessageInput = ({
         style={{ height: "40px", minHeight: "10px" }}
         value={text}
       />
-      <div className="right-2 bottom-0 w-1/6 flex items-center justify-center">
-        <input
-          type="file"
-          id="file"
-          className="hidden"
-          onChange={(e) => setImg(e.target.files?.[0])}
-        />
-        <label htmlFor="file" className="cursor-pointer text-3xl">
-          +
+      <div className="right-2 bottom-0 flex items-center justify-center gap-4 self-end">
+        <input type="file" id="file" className="hidden" onChange={handleFile} />
+        <label htmlFor="file" className="cursor-pointer text-3xl relative">
+          <RiImageAddLine />
+          {img && (
+            <div className="absolute -top-1 -left-2 bg-white rounded-full">
+              <RiCheckboxCircleFill className="w-full h-full text-xl text-green-600 font-bold" />
+            </div>
+          )}
         </label>
         <button type="submit" className="cursor-pointer text-3xl">
-          {"->"}
+          <RiSendPlane2Line />
         </button>
       </div>
     </form>

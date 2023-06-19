@@ -19,7 +19,7 @@ export const Message = ({ m, messagesWindowRef }: any) => {
       }`}
     >
       <div
-        className={` h-10 w-10 border-black  rounded-full overflow-hidden ${
+        className={` w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ${
           currentUser.uid === m.senderId ? "order-2" : ""
         }`}
       >
@@ -30,7 +30,7 @@ export const Message = ({ m, messagesWindowRef }: any) => {
               : state.user.photoURL
           }
           alt=""
-          className="min-w-full min-h-full"
+          className=""
         />
       </div>
       <div

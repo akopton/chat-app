@@ -9,19 +9,19 @@ import {
 import { AuthContext } from "./AuthContext"
 import { TUserInfo } from "@/types/TUserInfo"
 
-type TState = {
+type TState<T> = {
   chatId: string
-  user: TUserInfo
+  user: T
 }
 
-type TAction = {
+type TAction<T> = {
   type: "CHANGE_USER"
-  payload: TUserInfo
+  payload: T
 }
 
 export const ChatContext = createContext({
-  state: {} as TState,
-  dispatch: {} as Dispatch<TAction>,
+  state: {} as TState<TUserInfo>,
+  dispatch: {} as Dispatch<TAction<TUserInfo>>,
 })
 export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
   const currentUser = useContext(AuthContext)
@@ -30,7 +30,10 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     user: {} as TUserInfo,
   }
 
-  const chatReducer = (state: TState, action: TAction) => {
+  const chatReducer = (
+    state: TState<TUserInfo>,
+    action: TAction<TUserInfo>
+  ) => {
     switch (action.type) {
       case "CHANGE_USER":
         return {
