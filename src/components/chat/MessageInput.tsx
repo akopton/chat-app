@@ -26,11 +26,10 @@ export const MessageInput = ({
 }: {
   messagesWindowRef: any
 }) => {
-  const currentUser = useContext(AuthContext)
-  const { state } = useContext(ChatContext)
-
   const [text, setText] = useState<string>("")
   const [img, setImg] = useState<File | undefined>()
+  const { state } = useContext(ChatContext)
+  const currentUser = useContext(AuthContext)
 
   const handleFile = (e: React.FormEvent<HTMLInputElement>) => {
     const file = e.currentTarget.files?.[0]
@@ -57,52 +56,7 @@ export const MessageInput = ({
     if (!text && !img) return
     setText("")
     setImg(undefined)
-    if (!img) {
-      const docRef = doc(db, "chats", state.chatId)
-      await addNewMessage(docRef, text, currentUser.uid, Timestamp.now())
-    } else {
-      const docRef = doc(db, "chats", state.chatId)
-      const storageRef = ref(storage, uuid())
-      const uploadTask = uploadBytesResumable(storageRef, img)
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {},
-        (err) => {
-          console.log(err)
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(
-            async (downloadURL: string) => {
-              await addNewMessage(
-                docRef,
-                text,
-                currentUser.uid,
-                Timestamp.now(),
-                downloadURL
-              )
-            }
-          )
-        }
-      )
-    }
-    await updateDoc(doc(db, "userChats", currentUser.uid), {
-      [state.chatId + ".lastMessage"]: {
-        text,
-        senderId: currentUser.uid,
-        isOpened: true,
-        img: img === undefined ? false : true,
-      },
-      [state.chatId + ".date"]: serverTimestamp(),
-    })
-    await updateDoc(doc(db, "userChats", state.user.uid), {
-      [state.chatId + ".lastMessage"]: {
-        text,
-        senderId: currentUser.uid,
-        isOpened: false,
-        img: img ? true : false,
-      },
-      [state.chatId + ".date"]: serverTimestamp(),
-    })
+    await addNewMessage({ state, currentUser, text, img })
   }
 
   return (

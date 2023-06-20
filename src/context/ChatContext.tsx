@@ -9,7 +9,7 @@ import {
 import { AuthContext } from "./AuthContext"
 import { TUserInfo } from "@/types/TUserInfo"
 
-type TState<T> = {
+export type TState<T> = {
   chatId: string
   user: T
 }
