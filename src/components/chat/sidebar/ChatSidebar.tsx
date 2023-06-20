@@ -2,7 +2,7 @@
 
 import { Search } from "./Search"
 import { Settings } from "./Settings"
-import { ChatsList } from "./ChatsList"
+import { ChatsList } from "./chats/ChatsList"
 
 export const ChatSidebar = () => {
   return (

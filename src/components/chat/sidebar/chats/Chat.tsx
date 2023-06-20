@@ -1,12 +1,12 @@
 "use client"
 
-import { useDate } from "@/app/hooks/useDate"
+import { useDate } from "@/hooks/useDate"
 import { AuthContext } from "@/context/AuthContext"
 import { ChatContext } from "@/context/ChatContext"
 import { db } from "@/firebase/firebase"
 import { TUserInfo } from "@/types/TUserInfo"
 import { doc, updateDoc } from "firebase/firestore"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { BsDot } from "react-icons/bs"
 
 export const Chat = ({ chatId, data }: any) => {
@@ -20,6 +20,12 @@ export const Chat = ({ chatId, data }: any) => {
       [chatId + ".lastMessage" + ".isOpened"]: true,
     })
   }
+
+  // const [someDate, setSomeDate] = useDate(data.date)
+
+  // useEffect(() => {
+  //   console.log(someDate)
+  // }, [])
 
   return (
     <li

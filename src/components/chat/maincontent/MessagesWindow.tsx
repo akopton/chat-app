@@ -1,10 +1,6 @@
 "use client"
 
-import {
-  useContext,
-  useEffect,
-  useState,
-} from "react"
+import { useContext, useEffect, useState } from "react"
 import { Message } from "./Message"
 import { ChatContext } from "@/context/ChatContext"
 import { doc, onSnapshot } from "firebase/firestore"

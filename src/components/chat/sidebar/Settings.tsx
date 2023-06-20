@@ -1,9 +1,9 @@
 "use client"
 
-import { AuthContext } from "../../context/AuthContext"
+import { AuthContext } from "../../../context/AuthContext"
 import { useContext } from "react"
 import { User as FirebaseUser, signOut } from "firebase/auth"
-import { auth } from "../../firebase/firebase"
+import { auth } from "../../../firebase/firebase"
 import { useRouter } from "next/navigation"
 import { ChatContext } from "@/context/ChatContext"
 

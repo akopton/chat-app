@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useContext } from "react"
-import { ChatSidebar } from "./ChatSidebar"
-import { OpenedChat } from "./OpenedChat"
+import { ChatSidebar } from "./sidebar/ChatSidebar"
+import { OpenedChat } from "./maincontent/OpenedChat"
 import { AuthContext } from "../../context/AuthContext"
 import Link from "next/link"
 
