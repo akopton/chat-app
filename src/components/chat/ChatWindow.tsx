@@ -2,7 +2,7 @@
 
 import React, { useContext } from "react"
 import { ChatSidebar } from "./sidebar/ChatSidebar"
-import { OpenedChat } from "./maincontent/OpenedChat"
+import { OpenedChat } from "./main/OpenedChat"
 import { AuthContext } from "../../context/AuthContext"
 import Link from "next/link"
 
