@@ -2,18 +2,8 @@
 
 import { AuthContext } from "@/context/AuthContext"
 import { ChatContext } from "@/context/ChatContext"
-import { db, storage } from "@/firebase/firebase"
 import { inputResize } from "@/utils/inputResize"
-import {
-  Timestamp,
-  arrayUnion,
-  doc,
-  serverTimestamp,
-  updateDoc,
-} from "firebase/firestore"
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
-import { Ref, useContext, useEffect, useState } from "react"
-import { v4 as uuid } from "uuid"
+import { useContext, useState } from "react"
 import {
   RiCheckboxCircleFill,
   RiImageAddLine,

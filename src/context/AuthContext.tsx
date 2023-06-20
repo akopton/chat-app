@@ -1,10 +1,10 @@
 "use client"
 import { auth } from "../firebase/firebase"
-import { onAuthStateChanged } from "firebase/auth"
+import { User, onAuthStateChanged } from "firebase/auth"
 import { ReactNode, createContext, useEffect, useState } from "react"
 import { User as FirebaseUser } from "firebase/auth"
 
-const defaultUser = {} as FirebaseUser
+const defaultUser = {} as User
 export const AuthContext = createContext(defaultUser)
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
